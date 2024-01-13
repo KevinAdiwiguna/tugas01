@@ -1,11 +1,10 @@
 'use client'
 
 import React, { useState } from 'react'
-import { signIn } from 'next-auth/react'
 import { useSession } from "next-auth/react"
 import { useHandleAuth } from '@/hooks/useHandleAuth'
-import { redirect } from 'next/navigation'
-import toast, { Toaster } from 'react-hot-toast'
+import { Toaster } from 'react-hot-toast'
+import { SignIn } from '@/app/services/auth/signin'
 
 export const SignInForm = () => {
   const { data: session, status } = useSession()
@@ -13,8 +12,8 @@ export const SignInForm = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    Email: '',
+    Password: '',
   })
 
   const inputControll = (e: any) => {
@@ -24,18 +23,9 @@ export const SignInForm = () => {
 
   const handleLogin = async (e: any) => {
     e.preventDefault()
+    setIsSubmitting(true)
     try {
-      await signIn('credentials', {
-        Email: formData.email,
-        Password: formData.password,
-        redirect: false
-      }).then(({ ok, error }: any) => {
-        if (ok) {
-          redirect('/')
-        } else {
-          toast.error("email/username or password is incorrect. try again:");
-        }
-      })
+      await SignIn(formData)
     } catch (error: any) {
       throw new Error(error)
     } finally {
@@ -56,13 +46,13 @@ export const SignInForm = () => {
       />
       <div className='flex flex-col gap-2 py-2 mt-4'>
         <label htmlFor="email" className='text-neutral-400'>Email</label>
-        <input type="email" name='email' placeholder='yourmail@mail.com' className='px-3 rounded-full p-1 text-black bg-blue-100' onChange={inputControll} />
+        <input type="email" name='Email' placeholder='yourmail@mail.com' className='px-3 rounded-full p-1 text-black bg-blue-100' onChange={inputControll} required />
       </div>
       <div className='flex flex-col gap-2 py-2'>
         <label htmlFor="password" className='text-neutral-400'>Password</label>
-        <input type="password" name='password' placeholder='********' className='px-3 rounded-full p-1 text-black bg-blue-100' onChange={inputControll} />
+        <input type="password" name='Password' placeholder='********' className='px-3 rounded-full p-1 text-black bg-blue-100' onChange={inputControll} required />
       </div>
-      <button onClick={() => setIsSubmitting(true)} className={`text-center bg-indigo-700 hover:bg-indigo-900 duration-300 w-full mt-12 p-2 rounded-full ${isSubmitting && 'cursor-not-allowed'}`}>LOGIN</button>
+      <button className={`text-center bg-indigo-700 hover:bg-indigo-900 duration-300 w-full mt-12 p-2 rounded-full ${isSubmitting && 'cursor-not-allowed'}`}>LOGIN</button>
     </form>
   )
 }

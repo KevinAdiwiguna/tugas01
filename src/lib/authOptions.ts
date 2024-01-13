@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "perpustakaan",
       credentials: {
-        Email: { label: "email", type: "email", placeholder: "example@yourmail.com" },
+        Email: { label: "Email", type: "email", placeholder: "example@yourmail.com" },
         Password: { label: "Password", type: "password" }
       },
       async authorize(credentials: credentialsInterface) {
@@ -31,6 +31,7 @@ export const authOptions: NextAuthOptions = {
           }
         })
 
+        console.log({ Email, Password, getExistingUser })
         const verifyPassword = await argon2.verify(getExistingUser?.Password, Password)
 
 
@@ -60,7 +61,7 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token, user }) {
       return {
-        ...session, ...user,
+        ...session,
         UserID: token.UserID,
         Username: token.Username,
         Nama_lengkap: token.Nama_lengkap,

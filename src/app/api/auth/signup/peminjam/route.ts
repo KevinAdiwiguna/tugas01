@@ -3,23 +3,23 @@ import argon2 from 'argon2'
 import { NextResponse } from "next/server"
 
 export const POST = async (req: any) => {
-  const { username, email, password, nama_lengkap, alamat } = await req.json()
+  const { Username, Email, Password, Nama_lengkap, Alamat } = await req.json()
   const checkExistingUser = await db.user.findFirst({
     where: {
-      Email: email
+      Email: Email
     }
   })
   if (checkExistingUser) {
     return NextResponse.json({ msg: "Email already exist in our records. please try another one or log in" }, { status: 400 })
   }
-  const hashPassword = await argon2.hash(password)
+  const hashPassword = await argon2.hash(Password)
 
   const createUser = await db.user.create({
     data: {
-      Nama_lengkap: nama_lengkap,
-      Alamat: alamat,
-      Username: username,
-      Email: email,
+      Nama_lengkap: Username,
+      Alamat: Email,
+      Username: Password,
+      Email: Nama_lengkap,
       Password: hashPassword
     }
   })
