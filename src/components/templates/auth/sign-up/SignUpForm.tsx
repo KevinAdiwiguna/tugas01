@@ -24,7 +24,6 @@ const SignUpForm = () => {
   }
 
 
-
   const handleRegister = async (e: any) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -70,7 +69,7 @@ const SignUpForm = () => {
       </div>
       <div className='flex flex-col gap-2 py-2'>
         <label htmlFor="address" className='text-neutral-400'>Address</label>
-        <input type="text" name='Alamat' placeholder='your full name' className='px-3 rounded-full py-1 text-black bg-blue-50' onChange={inputControll} required />
+        <input type="text" name='Alamat' placeholder='address' className='px-3 rounded-full py-1 text-black bg-blue-50' onChange={inputControll} required />
       </div>
       <button className={`text-center bg-indigo-700 hover:bg-indigo-900 duration-300 w-full mt-12 p-2 rounded-full ${isSubmitting && 'cursor-not-allowed'}`} type='submit'>LOGIN</button>
     </form>

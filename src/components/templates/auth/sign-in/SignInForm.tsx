@@ -27,7 +27,7 @@ export const SignInForm = () => {
     try {
       await SignIn(formData)
     } catch (error: any) {
-      throw new Error(error)
+      // throw new Error(error)
     } finally {
       setIsSubmitting(false)
     }

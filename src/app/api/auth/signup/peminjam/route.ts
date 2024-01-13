@@ -16,10 +16,10 @@ export const POST = async (req: any) => {
 
   const createUser = await db.user.create({
     data: {
-      Nama_lengkap: Username,
-      Alamat: Email,
-      Username: Password,
-      Email: Nama_lengkap,
+      Nama_lengkap: Nama_lengkap,
+      Alamat: Alamat,
+      Username: Username,
+      Email: Email,
       Password: hashPassword
     }
   })
