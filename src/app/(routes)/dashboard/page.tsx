@@ -1,9 +1,9 @@
-import SideBar from '@/components/organisms/Sidebar/Sidebar'
+import SideBar from '@/components/templates/sidebar/Sidebar'
 import React from 'react'
 
 const Page = () => {
   return (
-    <SideBar />
+    <SideBar>gugugu</SideBar>
   )
 }
 

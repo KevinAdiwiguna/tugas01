@@ -24,6 +24,7 @@ export const authOptions: NextAuthOptions = {
         Password: { label: "Password", type: "password" }
       },
       async authorize(credentials: credentialsInterface) {
+        const salt = Buffer.from(process.env.HASH_SALT ?? "")
         const { Email, Password } = credentials
         const getExistingUser: any = await db.user.findFirst({
           where: {
@@ -31,8 +32,7 @@ export const authOptions: NextAuthOptions = {
           }
         })
 
-        console.log({ Email, Password, getExistingUser })
-        const verifyPassword = await argon2.verify(getExistingUser?.Password, Password)
+        const verifyPassword = await argon2.verify(getExistingUser?.Password, Password, { salt: salt })
 
 
         if (!getExistingUser) return null
