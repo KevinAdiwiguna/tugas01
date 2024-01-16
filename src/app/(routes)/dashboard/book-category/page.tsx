@@ -13,7 +13,7 @@ const Page = () => {
         <button className='p-2 bg-blue-500 font-base text-white rounded-lg flex justify-center items-center gap-2' onClick={() => setModalCreate(true)}>Create Category <FaPlus /></button>
       </div>
 
-      {modalCreate && <CreateModal />}
+      {modalCreate && <CreateModal setModalCreate={setModalCreate} modalCreate={modalCreate} />}
     </Sidebar>
 
   )

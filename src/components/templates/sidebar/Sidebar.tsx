@@ -12,7 +12,7 @@ interface sideBarProps {
 
 const Sidebar = ({ children }: sideBarProps) => {
   const session: any = useSession()
-  const { bookSettings, open, setOpen, userSettings } = useSidebar()
+  const { bookSettings, open, setOpen, userSettings, signOut } = useSidebar()
 
 
   return (
@@ -33,12 +33,18 @@ const Sidebar = ({ children }: sideBarProps) => {
           <h1 className={`text-black origin-left font-medium text-xl duration-200 ${!open && "scale-0"}`}>{session.data && session?.data.Username} {!session.data && "Loading"}</h1>
         </div>
 
-        <SidebarList datas={userSettings} open={open} />
-        <SidebarList datas={bookSettings} open={open} />
+        <SidebarList datas={userSettings} open={open} isSignOut={false} />
+        <SidebarList datas={bookSettings} open={open} isSignOut={false} />
+
+
+        <SidebarList datas={signOut} open={open} isSignOut={true} />
+
       </div>
       <div className="h-screen flex-1 p-7">
         {children}
       </div>
+
+
     </div>
   );
 };

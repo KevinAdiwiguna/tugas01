@@ -23,11 +23,15 @@ export const useSidebar = () => {
     { title: 'Book Category', icons: <MdCategory /> },
     { title: 'Create New Book', icons: <FaRegSquarePlus /> },
   ]
+  const signOut = [
+    { title: 'Sign Out', icons: < MdBook />, header: true },
+  ]
 
   return {
     userSettings,
     bookSettings,
     open,
     setOpen,
+    signOut
   }
 }
