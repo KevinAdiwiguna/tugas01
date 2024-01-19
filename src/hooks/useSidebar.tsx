@@ -20,8 +20,8 @@ export const useSidebar = () => {
   ]
   const bookSettings = [
     { title: 'Book Settings', icons: < MdBook />, header: true },
-    { title: 'Book Category', icons: <MdCategory /> },
-    { title: 'Create New Book', icons: <FaRegSquarePlus /> },
+    { title: 'Create Books', icons: <MdCategory /> },
+    { title: 'Create Category', icons: <FaRegSquarePlus /> },
   ]
   const signOut = [
     { title: 'Sign Out', icons: < MdBook />, header: true },

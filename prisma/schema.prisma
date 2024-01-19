@@ -21,7 +21,7 @@ model buku {
   @@index([TahunTerbit], map: "TahunTerbit")
 }
 
-model kategoribuku {
+model kategoribuku {  
   KategoriID          Int                   @id @default(autoincrement())
   NamaKategori        String                @db.VarChar(255)
   kategoribuku_relasi kategoribuku_relasi[]
@@ -82,6 +82,7 @@ model user {
   Username       String           @db.VarChar(255)
   Password       String           @db.VarChar(255)
   Email          String           @db.VarChar(255)
+  Role           String           @db.VarChar(255)
   Nama_lengkap   String           @db.VarChar(255)
   Alamat         String           @db.Text
   koleksipribadi koleksipribadi[]

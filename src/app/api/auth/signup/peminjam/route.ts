@@ -14,17 +14,24 @@ export const POST = async (req: any) => {
     return NextResponse.json({ msg: "Email already exist in our records. please try another one or log in" }, { status: 400 })
   }
   const hashPassword = await argon2.hash(Password, { salt: salt })
+  try {
+    const createUser = await db.user.create({
+      data: {
+        Nama_lengkap: Nama_lengkap,
+        Alamat: Alamat,
+        Username: Username,
+        Email: Email,
+        Password: hashPassword,
+        Role: "peminjam"
 
-  const createUser = await db.user.create({
-    data: {
-      Nama_lengkap: Nama_lengkap,
-      Alamat: Alamat,
-      Username: Username,
-      Email: Email,
-      Password: hashPassword
-    }
-  })
-  return NextResponse.json({ msg: "create success", data: createUser }, { status: 201 })
+      }
+    })
+    return NextResponse.json({ msg: "create success", data: createUser }, { status: 201 })
+  } catch (error: any) {
+    return NextResponse.json({ msg: error.message })
+
+  }
+
 }
 
 export const GET = async () => {
